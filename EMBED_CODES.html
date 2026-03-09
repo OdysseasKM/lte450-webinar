@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LTE450 Webinar - Embed Codes</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #f5f5f5; }
+        h1 { color: #1a1a2e; }
+        h2 { color: #16213e; margin-top: 40px; border-bottom: 2px solid #f59e0b; padding-bottom: 8px; }
+        .code-block { background: #1a1a2e; color: #e2e8f0; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+        .code-block code { white-space: pre-wrap; font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; }
+        .note { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+        .copy-btn { background: #f59e0b; color: #1a1a2e; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 8px; }
+        .copy-btn:hover { background: #d97706; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { text-align: left; padding: 12px; border: 1px solid #ddd; }
+        th { background: #1a1a2e; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+    </style>
+</head>
+<body>
+
+<h1>🎬 LTE450 Webinar - Embed Codes</h1>
+
+<p>Copy the code snippets below to integrate the webinar into the client's website.</p>
+
+<div class="note">
+    <strong>Important:</strong> Replace <code>/webinar/</code> with the actual path where you upload the webinar folder on the client's server.
+</div>
+
+<!-- ===== BASIC IFRAME ===== -->
+<h2>1. Basic iframe Embed</h2>
+<p>Simple embed with fixed height. Works on most websites.</p>
+
+<div class="code-block">
+<code>&lt;iframe 
+    src="/webinar/index.html" 
+    width="100%" 
+    height="800" 
+    frameborder="0" 
+    allowfullscreen&gt;
+&lt;/iframe&gt;</code>
+</div>
+
+<!-- ===== RESPONSIVE IFRAME ===== -->
+<h2>2. Responsive iframe (16:9)</h2>
+<p>Maintains aspect ratio on all screen sizes. Best for modern responsive sites.</p>
+
+<div class="code-block">
+<code>&lt;div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden;"&gt;
+    &lt;iframe 
+        src="/webinar/index.html" 
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px;"
+        allowfullscreen&gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;</code>
+</div>
+
+<!-- ===== STYLED EMBED ===== -->
+<h2>3. Styled Embed with Shadow</h2>
+<p>Adds visual polish with rounded corners and shadow.</p>
+
+<div class="code-block">
+<code>&lt;div style="max-width: 1200px; margin: 40px auto; padding: 0 20px;"&gt;
+    &lt;iframe 
+        src="/webinar/index.html" 
+        width="100%" 
+        height="750" 
+        style="border: none; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.15);"
+        allowfullscreen&gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;</code>
+</div>
+
+<!-- ===== FULL PAGE ===== -->
+<h2>4. Full Page (Dedicated Webinar Page)</h2>
+<p>Makes the webinar fill the entire browser window.</p>
+
+<div class="code-block">
+<code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;LTE450 Webinar&lt;/title&gt;
+    &lt;style&gt;
+        * { margin: 0; padding: 0; }
+        html, body { height: 100%; overflow: hidden; }
+        iframe { width: 100%; height: 100%; border: none; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;iframe src="/webinar/index.html" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+</div>
+
+<!-- ===== DIRECT LINK ===== -->
+<h2>5. Direct Link (No Embed)</h2>
+<p>Simply link to the webinar page. Opens in same or new tab.</p>
+
+<div class="code-block">
+<code>&lt;!-- Same tab --&gt;
+&lt;a href="/webinar/index.html"&gt;Watch the LTE450 Webinar&lt;/a&gt;
+
+&lt;!-- New tab --&gt;
+&lt;a href="/webinar/index.html" target="_blank"&gt;Watch the LTE450 Webinar ↗&lt;/a&gt;</code>
+</div>
+
+<!-- ===== BUTTON LINK ===== -->
+<h2>6. Styled Button Link</h2>
+<p>Eye-catching call-to-action button.</p>
+
+<div class="code-block">
+<code>&lt;a href="/webinar/index.html" 
+   style="display: inline-block; 
+          background: linear-gradient(135deg, #d97706, #f59e0b); 
+          color: #1a1a2e; 
+          padding: 16px 32px; 
+          border-radius: 50px; 
+          text-decoration: none; 
+          font-weight: 700; 
+          font-size: 18px;
+          box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);"&gt;
+    ▶ Watch the LTE450 Webinar
+&lt;/a&gt;</code>
+</div>
+
+<!-- ===== WORDPRESS ===== -->
+<h2>7. WordPress (Gutenberg Block)</h2>
+<p>Add a "Custom HTML" block and paste this code:</p>
+
+<div class="code-block">
+<code>&lt;div class="webinar-container"&gt;
+    &lt;iframe 
+        src="/wp-content/webinar/index.html" 
+        width="100%" 
+        height="800" 
+        frameborder="0" 
+        allowfullscreen
+        loading="lazy"&gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;</code>
+</div>
+
+<div class="note">
+    <strong>WordPress path:</strong> Upload the webinar folder to <code>/wp-content/webinar/</code> via FTP or File Manager.
+</div>
+
+<!-- ===== EXTERNAL HOSTING ===== -->
+<h2>8. External Hosting (Netlify/Vercel)</h2>
+<p>If hosting the webinar separately, use the full URL:</p>
+
+<div class="code-block">
+<code>&lt;iframe 
+    src="https://lte450-webinar.netlify.app/" 
+    width="100%" 
+    height="800" 
+    frameborder="0" 
+    allowfullscreen&gt;
+&lt;/iframe&gt;</code>
+</div>
+
+<div class="note">
+    <strong>To deploy to Netlify:</strong><br>
+    1. Go to <a href="https://app.netlify.com/drop" target="_blank">app.netlify.com/drop</a><br>
+    2. Drag and drop the <code>webinar</code> folder<br>
+    3. Get your free URL instantly
+</div>
+
+<!-- ===== SUMMARY TABLE ===== -->
+<h2>Quick Reference</h2>
+
+<table>
+    <tr>
+        <th>Method</th>
+        <th>Best For</th>
+        <th>Effort</th>
+    </tr>
+    <tr>
+        <td>Basic iframe</td>
+        <td>Most websites</td>
+        <td>Copy & paste</td>
+    </tr>
+    <tr>
+        <td>Responsive iframe</td>
+        <td>Mobile-friendly sites</td>
+        <td>Copy & paste</td>
+    </tr>
+    <tr>
+        <td>Full page</td>
+        <td>Dedicated webinar URL</td>
+        <td>New HTML file</td>
+    </tr>
+    <tr>
+        <td>Direct link</td>
+        <td>Navigation menus</td>
+        <td>Copy & paste</td>
+    </tr>
+    <tr>
+        <td>Netlify hosting</td>
+        <td>No server access</td>
+        <td>Drag & drop</td>
+    </tr>
+</table>
+
+<hr style="margin: 40px 0;">
+<p style="color: #666; font-size: 14px;">
+    <strong>Files to upload:</strong> index.html, styles.css, player.js, webinar-data.js, /slides folder, /audio folder
+</p>
+
+</body>
+</html>

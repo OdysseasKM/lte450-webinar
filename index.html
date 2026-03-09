@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTE450 for Critical Communications | Webinar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div class="welcome-overlay" id="welcomeOverlay">
+        <div class="welcome-card">
+            <div class="logo-mark">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0a0e1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <h1>LTE450 for Critical Communications</h1>
+            <p class="welcome-subtitle">Reliable broadband LTE solutions for public safety and industry</p>
+            <div class="welcome-details">
+                <div class="welcome-detail">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>30 minutes</span>
+                </div>
+                <div class="welcome-detail">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <span>43 slides</span>
+                </div>
+                <div class="welcome-detail">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span>5 quizzes</span>
+                </div>
+            </div>
+            <button class="btn-start" id="btnStart" onclick="startWebinar()">Begin Webinar</button>
+            <div class="welcome-resume" id="resumePrompt" style="display:none;">
+                <span>You left off at slide <strong id="resumeSlide"></strong>.</span>
+                <a id="btnResume" onclick="resumeWebinar()">Resume where you left off</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Webinar Container -->
+    <div class="webinar-container" id="webinarContainer">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>LTE450 Webinar</h1>
+                <p>Critical Communications</p>
+            </div>
+            <nav class="sidebar-nav" id="sidebarNav"></nav>
+            <div class="sidebar-footer">
+                <div class="progress-info">
+                    <span id="progressPercent">0% complete</span>
+                    <span id="progressSlides">0 / 43</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="sidebarProgress"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <button class="btn-toggle-sidebar" id="btnToggleSidebar" onclick="toggleSidebar()" title="Toggle sidebar (S)">
+                        <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                    <div class="current-slide-info" id="slideInfo">
+                        <span>1 / 43</span> LTE450 for Critical Communications
+                    </div>
+                </div>
+                <div class="top-bar-right">
+                    <button class="btn-icon" id="btnTranscript" onclick="toggleTranscript()" title="Toggle transcript (T)">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                        <span>CC</span>
+                    </button>
+                    <button class="btn-icon" id="btnShortcuts" onclick="toggleShortcuts()" title="Keyboard shortcuts (?)">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    </button>
+                    <button class="btn-icon" id="btnFullscreen" onclick="toggleFullscreen()" title="Fullscreen (F)">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide Area -->
+            <div class="slide-area" id="slideArea">
+                <button class="slide-nav-arrow prev" id="btnPrevSlide" onclick="prevSlide()" title="Previous slide">
+                    <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+
+                <div class="slide-wrapper">
+                    <img class="slide-image" id="slideImage" src="slides/Slide1.PNG" alt="Slide 1" draggable="false">
+                </div>
+
+                <button class="slide-nav-arrow next" id="btnNextSlide" onclick="nextSlide()" title="Next slide">
+                    <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+
+                <!-- Transcript Panel -->
+                <div class="transcript-panel" id="transcriptPanel">
+                    <div class="transcript-text" id="transcriptText"></div>
+                </div>
+            </div>
+
+            <!-- Controls Bar -->
+            <div class="controls-bar">
+                <div class="timeline-row">
+                    <input type="range" class="timeline-slider" id="timelineSlider" min="0" max="1802" value="0" step="1">
+                    <div class="time-display" id="timeDisplay">00:00 / 30:02</div>
+                </div>
+                <div class="controls-row">
+                    <div class="controls-left">
+                        <div class="volume-group">
+                            <button class="ctrl-btn" id="btnMute" onclick="toggleMute()" title="Mute (M)">
+                                <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                            </button>
+                            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="1">
+                        </div>
+                        <button class="ctrl-btn speed-btn" id="btnSpeed" onclick="cycleSpeed()" title="Playback speed">1x</button>
+                    </div>
+                    <div class="controls-center">
+                        <button class="ctrl-btn" id="btnPrev" onclick="prevSlide()" title="Previous (Left arrow)" disabled>
+                            <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+                        </button>
+                        <button class="ctrl-btn" onclick="rewind10()" title="Rewind 10s">
+                            <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path><text x="12" y="16" text-anchor="middle" fill="currentColor" stroke="none" font-size="8" font-weight="700">10</text></svg>
+                        </button>
+                        <button class="ctrl-btn play-btn" id="btnPlay" onclick="togglePlay()" title="Play / Pause (Space)">
+                            <svg class="icon-lg" id="iconPlay" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                            <svg class="icon-lg" id="iconPause" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none"><rect x="5" y="3" width="4" height="18"></rect><rect x="15" y="3" width="4" height="18"></rect></svg>
+                        </button>
+                        <button class="ctrl-btn" onclick="forward10()" title="Forward 10s">
+                            <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path><text x="12" y="16" text-anchor="middle" fill="currentColor" stroke="none" font-size="8" font-weight="700">10</text></svg>
+                        </button>
+                        <button class="ctrl-btn" id="btnNext" onclick="nextSlide()" title="Next (Right arrow)">
+                            <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+                        </button>
+                    </div>
+                    <div class="controls-right">
+                        <button class="ctrl-btn" onclick="downloadResources()" title="Download resources">
+                            <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="quiz-overlay" id="quizOverlay">
+        <div class="quiz-modal" id="quizModal">
+            <div class="quiz-badge">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                Knowledge Check
+            </div>
+            <h2 id="quizTitle"></h2>
+            <p class="quiz-subtitle" id="quizSubtitle">Test your understanding before continuing.</p>
+            <div class="quiz-question-counter" id="quizCounter"></div>
+            <div class="quiz-question" id="quizQuestion"></div>
+            <div class="quiz-options" id="quizOptions"></div>
+            <div class="quiz-explanation" id="quizExplanation"></div>
+            <div class="quiz-actions">
+                <button class="btn-secondary" id="btnSkipQuiz" onclick="skipQuiz()">Skip</button>
+                <button class="btn-primary" id="btnSubmitQuiz" onclick="submitQuizAnswer()" disabled>Check Answer</button>
+                <button class="btn-primary" id="btnNextQuestion" onclick="nextQuizQuestion()" style="display:none">Next</button>
+                <button class="btn-primary" id="btnContinueQuiz" onclick="closeQuiz()" style="display:none">Continue Webinar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Completion Screen -->
+    <div class="completion-overlay" id="completionOverlay">
+        <div class="completion-card">
+            <div class="completion-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            </div>
+            <h2>Webinar Complete!</h2>
+            <p>Congratulations on completing the LTE450 for Critical Communications webinar.</p>
+            <div class="completion-stats">
+                <div class="completion-stat">
+                    <div class="stat-value" id="statSlides">43</div>
+                    <div class="stat-label">Slides Viewed</div>
+                </div>
+                <div class="completion-stat">
+                    <div class="stat-value" id="statQuiz">0/10</div>
+                    <div class="stat-label">Quiz Score</div>
+                </div>
+                <div class="completion-stat">
+                    <div class="stat-value" id="statTime">30:00</div>
+                    <div class="stat-label">Time Spent</div>
+                </div>
+            </div>
+            <div class="completion-actions">
+                <button class="btn-secondary" onclick="restartWebinar()">Watch Again</button>
+                <button class="btn-primary" onclick="downloadCertificate()">Download Summary</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keyboard Shortcuts -->
+    <div class="shortcuts-tooltip" id="shortcutsTooltip">
+        <h3>Keyboard Shortcuts</h3>
+        <div class="shortcut-row"><span>Play / Pause</span><span class="key">Space</span></div>
+        <div class="shortcut-row"><span>Next slide</span><span class="key">&rarr;</span></div>
+        <div class="shortcut-row"><span>Previous slide</span><span class="key">&larr;</span></div>
+        <div class="shortcut-row"><span>Rewind 10s</span><span class="key">J</span></div>
+        <div class="shortcut-row"><span>Forward 10s</span><span class="key">L</span></div>
+        <div class="shortcut-row"><span>Toggle mute</span><span class="key">M</span></div>
+        <div class="shortcut-row"><span>Speed up</span><span class="key">&gt;</span></div>
+        <div class="shortcut-row"><span>Speed down</span><span class="key">&lt;</span></div>
+        <div class="shortcut-row"><span>Toggle transcript</span><span class="key">T</span></div>
+        <div class="shortcut-row"><span>Toggle sidebar</span><span class="key">S</span></div>
+        <div class="shortcut-row"><span>Fullscreen</span><span class="key">F</span></div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Hidden audio element -->
+    <audio id="audioPlayer" preload="auto"></audio>
+
+    <script src="webinar-data.js"></script>
+    <script src="player.js"></script>
+</body>
+</html>
