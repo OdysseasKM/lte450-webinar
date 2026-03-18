@@ -23,8 +23,8 @@ slide_number,title,duration_seconds,section,is_quiz_break
 22,Integrations and Ecosystems,42,Integration and Validation,no
 23,Pilot Deployments and Validation,45,Integration and Validation,no
 24,Case Studies - Public Safety Wins,52,Integration and Validation,no
-25,Business Models and Funding,42,Business and Planning,no
-26,Deployment Roadmap Essentials,48,Business and Planning,no
+25,Deployment Roadmap Essentials,45,Business and Planning,no
+26,Business Models and Funding,42,Business and Planning,no
 27,Future Evolution and 5G Interplay,48,Future and Evolution,no
 28,Role of 450 Alliance Going Forward,42,Future and Evolution,yes
 29,Decision Maker Checklist,42,Decision and Action,no
@@ -42,3 +42,4 @@ slide_number,title,duration_seconds,section,is_quiz_break
 41,Innovation Opportunities,38,Appendix,no
 42,Timeline to Scale,32,Appendix,no
 43,Wrap Up and Next Engagement,28,Appendix,no
+44,Thank You - Connect With Us,25,Appendix,no
