@@ -1,45 +1,46 @@
 slide_number,title,duration_seconds,section,is_quiz_break
 1,LTE450 for Critical Communications,30,Introduction,no
-2,Why 450 MHz Matters,52,Introduction,no
-3,450 Alliance Overview,42,Introduction,no
-4,Primary Use Cases,52,Use Cases and Services,no
-5,Mission Critical Voice - MCPTT,55,Use Cases and Services,no
-6,Mission Critical Data and Video,52,Use Cases and Services,yes
-7,Network Resilience Strategies,48,Network Foundations,no
-8,Spectrum and Regulatory Considerations,45,Network Foundations,no
-9,Interoperability and Standards,48,Standards and Quality,no
-10,Quality of Service and Priority,45,Standards and Quality,no
-11,Security and Encryption,42,Security and Operations,no
-12,Roaming and Cross-Border Operations,42,Security and Operations,no
-13,Cost Efficiency and TCO,48,Economics,yes
-14,Radio Access Network Design,48,Technical Infrastructure,no
-15,Core Network and Virtualization,48,Technical Infrastructure,no
-16,Backhaul and Transport Options,45,Technical Infrastructure,no
-17,Devices and Terminals Ecosystem,42,Devices and Management,no
-18,Device Management and Provisioning,40,Devices and Management,no
-19,Operational Readiness and Training,42,Operations and Maintenance,no
-20,Maintenance and Lifecycle Management,42,Operations and Maintenance,no
-21,Key Performance Indicators,42,Operations and Maintenance,yes
-22,Integrations and Ecosystems,42,Integration and Validation,no
-23,Pilot Deployments and Validation,45,Integration and Validation,no
-24,Case Studies - Public Safety Wins,52,Integration and Validation,no
-25,Deployment Roadmap Essentials,45,Business and Planning,no
-26,Business Models and Funding,42,Business and Planning,no
-27,Future Evolution and 5G Interplay,48,Future and Evolution,no
-28,Role of 450 Alliance Going Forward,42,Future and Evolution,yes
-29,Decision Maker Checklist,42,Decision and Action,no
-30,Recommended Next Steps,40,Decision and Action,no
-31,Questions to Consider,40,Decision and Action,no
-32,Resources and References,35,Resources,no
-33,Contact and Collaboration Channels,35,Resources,no
-34,Key Takeaways,45,Summary and Closing,no
-35,Call to Action,38,Summary and Closing,no
-36,Thank You,30,Summary and Closing,yes
-37,Appendix - Technical Specs,30,Appendix,no
-38,Glossary of Key Terms,28,Appendix,no
-39,Risk and Mitigation Summary,40,Appendix,no
-40,Measuring Success,32,Appendix,no
-41,Innovation Opportunities,38,Appendix,no
-42,Timeline to Scale,32,Appendix,no
-43,Wrap Up and Next Engagement,28,Appendix,no
-44,Thank You - Connect With Us,25,Appendix,no
+2,Introduction,35,Introduction,no
+3,Why 450 MHz Matters,52,Introduction,no
+4,450 Alliance Overview,42,Introduction,no
+5,Primary Use Cases,52,Use Cases and Services,no
+6,Mission Critical Voice - MCPTT,55,Use Cases and Services,no
+7,Mission Critical Data and Video,52,Use Cases and Services,yes
+8,Network Resilience Strategies,48,Network Foundations,no
+9,Spectrum and Regulatory Considerations,45,Network Foundations,no
+10,Interoperability and Standards,48,Standards and Quality,no
+11,Quality of Service and Priority,45,Standards and Quality,no
+12,Security and Encryption,42,Security and Operations,no
+13,Roaming and Cross-Border Operations,42,Security and Operations,no
+14,Cost Efficiency and TCO,48,Economics,yes
+15,Radio Access Network Design,48,Technical Infrastructure,no
+16,Core Network and Virtualization,48,Technical Infrastructure,no
+17,Backhaul and Transport Options,45,Technical Infrastructure,no
+18,Devices and Terminals Ecosystem,42,Devices and Management,no
+19,Device Management and Provisioning,40,Devices and Management,no
+20,Operational Readiness and Training,42,Operations and Maintenance,no
+21,Maintenance and Lifecycle Management,42,Operations and Maintenance,no
+22,Key Performance Indicators,42,Operations and Maintenance,yes
+23,Integrations and Ecosystems,42,Integration and Validation,no
+24,Pilot Deployments and Validation,45,Integration and Validation,no
+25,Case Studies - Public Safety Wins,52,Integration and Validation,no
+26,Deployment Roadmap Essentials,45,Business and Planning,no
+27,Business Models and Funding,42,Business and Planning,no
+28,Future Evolution and 5G Interplay,48,Future and Evolution,no
+29,Role of 450 Alliance Going Forward,42,Future and Evolution,yes
+30,Decision Maker Checklist,42,Decision and Action,no
+31,Recommended Next Steps,40,Decision and Action,no
+32,Questions to Consider,40,Decision and Action,no
+33,Resources and References,35,Resources,no
+34,Contact and Collaboration Channels,35,Resources,no
+35,Key Takeaways,45,Summary and Closing,no
+36,Call to Action,38,Summary and Closing,no
+37,Thank You,30,Summary and Closing,yes
+38,Appendix - Technical Specs,30,Appendix,no
+39,Glossary of Key Terms,28,Appendix,no
+40,Risk and Mitigation Summary,40,Appendix,no
+41,Measuring Success,32,Appendix,no
+42,Innovation Opportunities,38,Appendix,no
+43,Timeline to Scale,32,Appendix,no
+44,Wrap Up and Next Engagement,28,Appendix,no
+45,Thank You - Connect With Us,25,Appendix,no
