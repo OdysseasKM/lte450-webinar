@@ -148,32 +148,31 @@
                 </div>
             </div>
         </main>
-    </div>
 
-    <!-- Quiz Modal -->
-    <div class="quiz-overlay" id="quizOverlay">
-        <div class="quiz-modal" id="quizModal">
-            <div class="quiz-badge">
-                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                Knowledge Check
-            </div>
-            <h2 id="quizTitle"></h2>
-            <p class="quiz-subtitle" id="quizSubtitle">Test your understanding before continuing.</p>
-            <div class="quiz-question-counter" id="quizCounter"></div>
-            <div class="quiz-question" id="quizQuestion"></div>
-            <div class="quiz-options" id="quizOptions"></div>
-            <div class="quiz-explanation" id="quizExplanation"></div>
-            <div class="quiz-actions">
-                <button class="btn-secondary" id="btnSkipQuiz" onclick="skipQuiz()">Skip</button>
-                <button class="btn-primary" id="btnSubmitQuiz" onclick="submitQuizAnswer()" disabled>Check Answer</button>
-                <button class="btn-primary" id="btnNextQuestion" onclick="nextQuizQuestion()" style="display:none">Next</button>
-                <button class="btn-primary" id="btnContinueQuiz" onclick="closeQuiz()" style="display:none">Continue Webinar</button>
+        <!-- Quiz Modal -->
+        <div class="quiz-overlay" id="quizOverlay">
+            <div class="quiz-modal" id="quizModal">
+                <div class="quiz-badge">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    Knowledge Check
+                </div>
+                <h2 id="quizTitle"></h2>
+                <p class="quiz-subtitle" id="quizSubtitle">Test your understanding before continuing.</p>
+                <div class="quiz-question-counter" id="quizCounter"></div>
+                <div class="quiz-question" id="quizQuestion"></div>
+                <div class="quiz-options" id="quizOptions"></div>
+                <div class="quiz-explanation" id="quizExplanation"></div>
+                <div class="quiz-actions">
+                    <button class="btn-secondary" id="btnSkipQuiz" onclick="skipQuiz()">Skip</button>
+                    <button class="btn-primary" id="btnSubmitQuiz" onclick="submitQuizAnswer()" disabled>Check Answer</button>
+                    <button class="btn-primary" id="btnNextQuestion" onclick="nextQuizQuestion()" style="display:none">Next</button>
+                    <button class="btn-primary" id="btnContinueQuiz" onclick="closeQuiz()" style="display:none">Continue Webinar</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Completion Screen -->
-    <div class="completion-overlay" id="completionOverlay">
+        <!-- Completion Screen -->
+        <div class="completion-overlay" id="completionOverlay">
         <div class="completion-card">
             <div class="completion-icon">
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
@@ -199,10 +198,10 @@
                 <button class="btn-primary" onclick="downloadCertificate()">Download Summary</button>
             </div>
         </div>
-    </div>
+        </div>
 
-    <!-- Keyboard Shortcuts -->
-    <div class="shortcuts-tooltip" id="shortcutsTooltip">
+        <!-- Keyboard Shortcuts -->
+        <div class="shortcuts-tooltip" id="shortcutsTooltip">
         <h3>Keyboard Shortcuts</h3>
         <div class="shortcut-row"><span>Play / Pause</span><span class="key">Space</span></div>
         <div class="shortcut-row"><span>Next slide</span><span class="key">&rarr;</span></div>
@@ -217,8 +216,9 @@
         <div class="shortcut-row"><span>Fullscreen</span><span class="key">F</span></div>
     </div>
 
-    <!-- Toast notification -->
-    <div class="toast" id="toast"></div>
+        <!-- Toast notification -->
+        <div class="toast" id="toast"></div>
+    </div>
 
     <!-- Hidden audio element -->
     <audio id="audioPlayer" preload="auto"></audio>
