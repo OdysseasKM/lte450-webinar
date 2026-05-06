@@ -567,11 +567,13 @@ function showQuiz(quiz) {
 function loadQuizQuestion() {
     const q = currentQuiz.questions[currentQuestionIndex];
     const total = currentQuiz.questions.length;
+    const modalEl = document.getElementById('quizModal');
 
     document.getElementById('quizCounter').textContent = `Question ${currentQuestionIndex + 1} of ${total}`;
     document.getElementById('quizQuestion').textContent = q.question;
     document.getElementById('quizExplanation').classList.remove('visible');
     document.getElementById('quizExplanation').textContent = '';
+    if (modalEl) modalEl.scrollTop = 0;
 
     selectedOption = null;
     answerSubmitted = false;
@@ -637,6 +639,25 @@ function submitQuizAnswer() {
     } else {
         document.getElementById('btnContinueQuiz').style.display = 'inline-flex';
     }
+
+    keepQuizActionVisible();
+}
+
+function keepQuizActionVisible() {
+    const actionButton = currentQuestionIndex < currentQuiz.questions.length - 1
+        ? document.getElementById('btnNextQuestion')
+        : document.getElementById('btnContinueQuiz');
+
+    if (!actionButton) return;
+
+    requestAnimationFrame(() => {
+        actionButton.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        try {
+            actionButton.focus({ preventScroll: true });
+        } catch (error) {
+            actionButton.focus();
+        }
+    });
 }
 
 function nextQuizQuestion() {
