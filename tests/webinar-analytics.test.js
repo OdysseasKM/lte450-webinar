@@ -6,7 +6,7 @@ const vm = require('node:vm');
 const path = require('node:path');
 
 const source = fs.readFileSync(path.join(__dirname, '..', 'webinar-analytics.js'), 'utf8');
-function fixture(enabled = true, storage = new Map()) {
+function fixture(enabled = true, storage = new Map(), clock = Date) {
     const events = [];
     const posthog = {
         __SV: 1,
@@ -39,7 +39,7 @@ function fixture(enabled = true, storage = new Map()) {
         },
         addEventListener: () => {}
     };
-    vm.runInNewContext(source, { window });
+    vm.runInNewContext(source, { window, Date: clock });
     const analytics = window.NetTechWebinarAnalytics;
     analytics.init([{duration: 10}, {duration: 10}, {duration: 10}]);
     return { analytics, events, posthog, storage };
@@ -123,21 +123,16 @@ test('appendix playback required for full completion', () => {
 });
 test('2x background playback intervals count when real elapsed time justifies them', () => {
     const storage = new Map();
-    const { analytics: a, events } = fixture(true, storage);
+    let fakeNow = Date.now();
+    class TestDate extends Date { static now() { return fakeNow; } }
+    const { analytics: a } = fixture(true, storage, TestDate);
     a.begin(false);
     // Simulate a delayed timeupdate event: 4.2 seconds of media progression
     // during 2.1 real seconds of 2x playback.
-    const realNow = Date.now;
-    let fakeNow = realNow();
-    try {
-        Date.now = () => fakeNow;
-        a.progressTick(1, 0, 10, true, 2);
-        fakeNow += 2100;
-        a.progressTick(1, 4.2, 10, true, 2);
-        a.slideEnded(1);
-    } finally {
-        Date.now = realNow;
-    }
+    a.progressTick(1, 0, 10, true, 2);
+    fakeNow += 2100;
+    a.progressTick(1, 4.2, 10, true, 2);
+    a.slideEnded(1);
     // Enough progress to pass 25% of two 10-second core slides
     // is not reached yet, but playback must have been credited.
     const stored = JSON.parse(storage.get('nettech_webinar_analytics_v1_lte450_part1'));
