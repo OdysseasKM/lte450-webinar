@@ -15,6 +15,7 @@ let quizScoreCorrect = 0;
 let quizScoreTotal = 0;
 let completedQuizzes = new Set();
 let startTime = Date.now();
+const webinarAnalytics = window.NetTechWebinarAnalytics;
 
 // Quiz state
 let currentQuiz = null;
@@ -44,6 +45,7 @@ const progressSlides = document.getElementById('progressSlides');
 function init() {
     buildSidebar();
     computeTotalDuration();
+    webinarAnalytics.init(WEBINAR_DATA.slides);
     checkResume();
     loadSlide(1, false);
     updateTranscript();
@@ -166,6 +168,7 @@ function loadSlide(num, animate = true) {
     if (num < 1 || num > WEBINAR_DATA.totalSlides) return;
 
     // Stop current playback timer
+    webinarAnalytics.slideChanged();
     stopSlideTimer();
 
     currentSlide = num;
@@ -220,6 +223,7 @@ function loadAudio(num) {
     audioAvailable = false;
     audioPlayer.oncanplaythrough = function() {
         audioAvailable = true;
+        stopSlideTimer();
         if (isPlaying) {
             audioPlayer.play().catch(() => {});
         }
@@ -234,15 +238,18 @@ function loadAudio(num) {
 
 function setupAudioEvents() {
     audioPlayer.addEventListener('ended', onSlideEnd);
+    audioPlayer.addEventListener('seeking', () => webinarAnalytics.seeked());
     audioPlayer.addEventListener('timeupdate', () => {
         if (audioAvailable) {
             slideElapsed = audioPlayer.currentTime;
+            webinarAnalytics.progressTick(currentSlide, slideElapsed, audioPlayer.duration, isPlaying && !audioPlayer.paused);
             updateTimeline();
         }
     });
 }
 
 function onSlideEnd() {
+    webinarAnalytics.slideEnded(currentSlide);
     // Check if we need to show a quiz
     const quiz = WEBINAR_DATA.quizzes.find(q => q.afterSlide === currentSlide && !completedQuizzes.has(q.afterSlide));
     if (quiz) {
@@ -275,6 +282,7 @@ function startSlideTimer() {
         slideElapsed += delta;
 
         const slideDuration = WEBINAR_DATA.slides[currentSlide - 1].duration;
+        webinarAnalytics.progressTick(currentSlide, Math.min(slideElapsed, slideDuration), slideDuration, isPlaying);
         updateTimeline();
 
         if (slideElapsed >= slideDuration) {
@@ -301,6 +309,7 @@ function togglePlay() {
 }
 
 function startPlayback() {
+    webinarAnalytics.seeked();
     isPlaying = true;
     document.getElementById('iconPlay').style.display = 'none';
     document.getElementById('iconPause').style.display = 'block';
@@ -316,6 +325,7 @@ function startPlayback() {
 }
 
 function pausePlayback() {
+    webinarAnalytics.stopped();
     isPlaying = false;
     document.getElementById('iconPlay').style.display = 'block';
     document.getElementById('iconPause').style.display = 'none';
@@ -341,6 +351,7 @@ function goToSlide(num) {
 }
 
 function rewind10() {
+    webinarAnalytics.seeked();
     if (audioAvailable && audioPlayer.duration) {
         audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 10);
     } else {
@@ -350,6 +361,7 @@ function rewind10() {
 }
 
 function forward10() {
+    webinarAnalytics.seeked();
     const dur = WEBINAR_DATA.slides[currentSlide - 1].duration;
     if (audioAvailable && audioPlayer.duration) {
         const newTime = audioPlayer.currentTime + 10;
@@ -433,6 +445,7 @@ function setupTimelineInteraction() {
 }
 
 function seekToGlobalTime(seconds) {
+    webinarAnalytics.seeked();
     // Find which slide this time falls into
     for (let i = WEBINAR_DATA.slides.length - 1; i >= 0; i--) {
         const s = WEBINAR_DATA.slides[i];
@@ -614,6 +627,7 @@ function submitQuizAnswer() {
 
     const q = currentQuiz.questions[currentQuestionIndex];
     const isCorrect = selectedOption === q.correct;
+    webinarAnalytics.quizAnswered(currentQuiz.afterSlide, isCorrect);
 
     quizScoreTotal++;
     if (isCorrect) quizScoreCorrect++;
@@ -666,6 +680,7 @@ function nextQuizQuestion() {
 }
 
 function skipQuiz() {
+    webinarAnalytics.quizSkipped(currentQuiz.afterSlide);
     completedQuizzes.add(currentQuiz.afterSlide);
     closeQuiz();
 }
@@ -701,6 +716,7 @@ function showCompletion() {
 }
 
 function restartWebinar() {
+    webinarAnalytics.restart();
     document.getElementById('completionOverlay').classList.remove('active');
     visitedSlides.clear();
     quizScoreCorrect = 0;
@@ -792,6 +808,7 @@ function loadSavedProgress() {
 
 // ─── Welcome / Start ───
 function startWebinar() {
+    webinarAnalytics.begin(false);
     const overlay = document.getElementById('welcomeOverlay');
     overlay.classList.add('hiding');
     setTimeout(() => { overlay.style.display = 'none'; }, 500);
@@ -806,6 +823,7 @@ function startWebinar() {
 
 function resumeWebinar() {
     const slideNum = loadSavedProgress();
+    webinarAnalytics.begin(true);
     const overlay = document.getElementById('welcomeOverlay');
     overlay.classList.add('hiding');
     setTimeout(() => { overlay.style.display = 'none'; }, 500);
