@@ -10,7 +10,20 @@ function fixture(enabled = true, storage = new Map()) {
     const events = [];
     const posthog = {
         __SV: 1,
-        init: function (_token, config) { this.config = config; },
+        init: function (_token, config) {
+            this.config = config;
+            // Simulate the SDK's automatic initial pageview after initialization.
+            if (config.capture_pageview) {
+                const pageview = config.before_send({
+                    event: '$pageview',
+                    properties: {
+                        $current_url: 'https://example.com/webinar/?sensitive=test',
+                        $referrer: 'https://example.org/private',
+                    }
+                });
+                if (pageview) events.push({ event: pageview.event, props: pageview.properties });
+            }
+        },
         capture: (event, props) => events.push({ event, props })
     };
     const window = {
@@ -44,6 +57,18 @@ test('disabled configuration records no events or local state', () => {
     a.progressTick(1, 2, 10, true);
     assert.equal(events.length, 0);
     assert.equal(storage.size, 0);
+});
+test('pageview is recorded before Begin with sanitized URL and webinar identifier', () => {
+    const { events, posthog } = fixture();
+    assert.equal(posthog.config.capture_pageview, true);
+    assert.equal(posthog.config.autocapture, false);
+    assert.equal(posthog.config.capture_pageleave, false);
+    assert.equal(count(events, '$pageview'), 1);
+    const props = events.find(e => e.event === '$pageview').props;
+    assert.equal(props.webinar_id, 'lte450_part1');
+    assert.equal(props.$current_url, 'https://example.com/webinar/');
+    assert.equal(props.$referrer, undefined);
+    assert.equal(count(events, 'webinar_started'), 0);
 });
 test('anonymous pageview, milestones and real core completion', () => {
     const { analytics: a, events, posthog } = fixture();
