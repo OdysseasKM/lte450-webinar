@@ -121,6 +121,28 @@ test('appendix playback required for full completion', () => {
     a.slideEnded(3);
     assert.equal(count(events, 'webinar_full_completed'), 1);
 });
+test('2x background playback intervals count when real elapsed time justifies them', () => {
+    const storage = new Map();
+    const { analytics: a, events } = fixture(true, storage);
+    a.begin(false);
+    // Simulate a delayed timeupdate event: 4.2 seconds of media progression
+    // during 2.1 real seconds of 2x playback.
+    const realNow = Date.now;
+    let fakeNow = realNow();
+    try {
+        Date.now = () => fakeNow;
+        a.progressTick(1, 0, 10, true, 2);
+        fakeNow += 2100;
+        a.progressTick(1, 4.2, 10, true, 2);
+        a.slideEnded(1);
+    } finally {
+        Date.now = realNow;
+    }
+    // Enough progress to pass 25% of two 10-second core slides
+    // is not reached yet, but playback must have been credited.
+    const stored = JSON.parse(storage.get('nettech_webinar_analytics_v1_lte450_part1'));
+    assert.ok(stored.bins[0].length >= 35, 'continuous 2x playback interval should count');
+});
 test('quiz events include only section and correctness', () => {
     const { analytics: a, events } = fixture();
     a.quizAnswered(7, true); a.quizSkipped(14);
