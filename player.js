@@ -15,6 +15,7 @@ let quizScoreCorrect = 0;
 let quizScoreTotal = 0;
 let completedQuizzes = new Set();
 let startTime = Date.now();
+let webinarStarted = false;
 const webinarAnalytics = window.NetTechWebinarAnalytics;
 
 // Quiz state
@@ -765,6 +766,8 @@ function downloadResources() {
 
 // ─── Progress Persistence ───
 function saveProgress() {
+    // Initial slide load must not overwrite a returning viewer's saved session.
+    if (!webinarStarted) return;
     const data = {
         slide: currentSlide,
         visited: Array.from(visitedSlides),
@@ -808,6 +811,7 @@ function loadSavedProgress() {
 
 // ─── Welcome / Start ───
 function startWebinar() {
+    webinarStarted = true;
     webinarAnalytics.begin(false);
     const overlay = document.getElementById('welcomeOverlay');
     overlay.classList.add('hiding');
@@ -823,6 +827,7 @@ function startWebinar() {
 
 function resumeWebinar() {
     const slideNum = loadSavedProgress();
+    webinarStarted = true;
     webinarAnalytics.begin(true);
     const overlay = document.getElementById('welcomeOverlay');
     overlay.classList.add('hiding');
