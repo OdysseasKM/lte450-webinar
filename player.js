@@ -243,7 +243,7 @@ function setupAudioEvents() {
     audioPlayer.addEventListener('timeupdate', () => {
         if (audioAvailable) {
             slideElapsed = audioPlayer.currentTime;
-            webinarAnalytics.progressTick(currentSlide, slideElapsed, audioPlayer.duration, isPlaying && !audioPlayer.paused);
+            webinarAnalytics.progressTick(currentSlide, slideElapsed, audioPlayer.duration, isPlaying && !audioPlayer.paused, audioPlayer.playbackRate);
             updateTimeline();
         }
     });
@@ -283,7 +283,7 @@ function startSlideTimer() {
         slideElapsed += delta;
 
         const slideDuration = WEBINAR_DATA.slides[currentSlide - 1].duration;
-        webinarAnalytics.progressTick(currentSlide, Math.min(slideElapsed, slideDuration), slideDuration, isPlaying);
+        webinarAnalytics.progressTick(currentSlide, Math.min(slideElapsed, slideDuration), slideDuration, isPlaying, playbackSpeed);
         updateTimeline();
 
         if (slideElapsed >= slideDuration) {
