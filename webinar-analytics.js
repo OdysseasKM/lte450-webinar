@@ -4,7 +4,7 @@
     const config = root.NETTECH_ANALYTICS_CONFIG || {};
     const enabled = config.enabled === true && /^phc_[a-zA-Z0-9_-]+$/.test(config.projectToken || '') &&
         ['https://eu.i.posthog.com', 'https://us.i.posthog.com'].includes(config.apiHost);
-    const BINS = 100, MAX_JUMP = 2.5, SAVE_INTERVAL = 3000;
+    const BINS = 100, MIN_JUMP_ALLOWANCE = 2.5, MAX_CONTINUOUS_GAP = 30, SAVE_INTERVAL = 3000;
     let state = null, last = null, lastSave = 0;
 
     function capture(event, props) {
@@ -130,17 +130,25 @@
 
     // Only uninterrupted, forward-playing timeline intervals earn coverage.
     // Tracks 100 fractional bins per slide rather than collecting every playback tick.
-    function progressTick(slide, time, duration, playing) {
+    function progressTick(slide, time, duration, playing, playbackRate = 1) {
         if (!state || !playing || !Number.isInteger(slide) || slide < 1 ||
             slide > state.durations.length || !Number.isFinite(time) ||
             !Number.isFinite(duration) || duration <= 0) return;
-        const sample = { slide, time, duration };
+        const sample = { slide, time, duration, at: Date.now() };
         if (!last || last.slide !== slide || last.duration !== duration) {
             last = sample;
             return;
         }
         const delta = time - last.time;
-        if (delta <= 0 || delta > MAX_JUMP) {
+        // In a background tab, media timeupdate events can be several seconds
+        // apart, especially at 2x. Credit these only if enough real time has
+        // elapsed to explain the observed media-clock advance.
+        const elapsedSeconds = Math.max(0, (sample.at - last.at) / 1000);
+        const speed = Number.isFinite(playbackRate) && playbackRate > 0
+            ? Math.min(playbackRate, 4) : 1;
+        const maxAdvance = Math.min(MAX_CONTINUOUS_GAP,
+            Math.max(MIN_JUMP_ALLOWANCE, elapsedSeconds * speed * 1.3 + 0.75));
+        if (delta <= 0 || delta > maxAdvance) {
             last = sample;
             return;
         }
@@ -163,7 +171,10 @@
         if (slide === state.coreSlides) state.coreEnd = true;
         if (slide === state.durations.length) {
             state.fullEnd = true;
-            once('end_reached', 'webinar_end_reached');
+            once('end_reached', 'webinar_end_reached', {
+                core_coverage_percent: Math.round(coverage(state.coreSlides) * 100),
+                full_coverage_percent: Math.round(coverage(state.durations.length) * 100)
+            });
         }
         milestones();
         stopped();
