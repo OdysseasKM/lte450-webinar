@@ -22,7 +22,8 @@
             person_profiles: 'never',
             persistence: 'memory',
             autocapture: false,
-            capture_pageview: false,
+            // Track one initial visit; interaction autocapture remains disabled.
+            capture_pageview: true,
             capture_pageleave: false,
             disable_session_recording: true,
             disable_surveys: true,
@@ -33,6 +34,8 @@
             respect_dnt: true,
             before_send: function(event) {
                 if (event && event.properties) {
+                    // Apply to auto pageviews as well as custom webinar events.
+                    event.properties.webinar_id = state.id;
                     event.properties.$current_url = root.location.origin + root.location.pathname;
                     delete event.properties.$referrer;
                     delete event.properties.$initial_referrer;
@@ -106,7 +109,6 @@
         state = blank(config.webinarId, durations, core);
         restore();
         initializePostHog();
-        capture('$pageview', { $current_url: root.location.origin + root.location.pathname });
         root.addEventListener('pagehide', () => save(true));
     }
     function begin(resume) {
